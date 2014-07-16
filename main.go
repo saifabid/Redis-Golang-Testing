@@ -57,6 +57,7 @@ func welcome() {
 	fmt.Println("5. setex")
 	fmt.Println("6. expire")
 	fmt.Println("7. ttl")
+	fmt.Println("8. exit")
 
 	fmt.Println()
 	fmt.Println("Please enter your commands choice in lower case")

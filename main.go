@@ -22,6 +22,13 @@ const ( // command constants
 	setex  = "setex"
 	ttl    = "ttl"
 )
+const ( // set commands
+
+	sadd     = "sadd"     // 3+
+	smembers = "smembers" // 2
+	spop     = "spop"     // 2
+
+)
 
 func main() {
 	go welcome() // by the time this executes, connections and connection related errors can be delt with
@@ -111,7 +118,8 @@ func parseCmd(test []string) (cmd string, arg []string, err bool, exit bool) {
 		exit = false
 
 	} else if length == 2 {
-		if test[0] == get || test[0] == del || test[0] == incr || test[0] == ttl { // has to be get or del if length is 2
+		if test[0] == get || test[0] == del || test[0] == incr ||
+			test[0] == ttl || test[0] == smembers || test[0] == spop { // has to be get or del if length is 2
 			err = false
 			cmd = test[0]
 			arg = test[1:]
@@ -124,7 +132,7 @@ func parseCmd(test []string) (cmd string, arg []string, err bool, exit bool) {
 		}
 
 	} else if length >= 3 {
-		if test[0] == set || test[0] == expire || test[0] == setex {
+		if test[0] == set || test[0] == expire || test[0] == setex || test[0] == sadd {
 			err = false
 			exit = false
 			cmd = test[0]
@@ -165,6 +173,15 @@ func excecuteCmd(cmd string, arg []string, c *redis.Client) {
 	case ttl:
 		rep := c.Cmd(cmd, arg)
 		fmt.Println("Time left: ", rep)
+	case sadd:
+		rep := c.Cmd(cmd, arg)
+		fmt.Println("Set added: ", rep)
+	case spop:
+		rep := c.Cmd(cmd, arg)
+		fmt.Println("Set value poped: ", rep)
+	case smembers:
+		rep := c.Cmd(cmd, arg)
+		fmt.Println("Set's members: ", rep)
 	default:
 		fmt.Println("nil")
 

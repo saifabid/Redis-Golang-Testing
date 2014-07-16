@@ -12,3 +12,6 @@ supports:
 - setex
 - expire
 - and if you type exit, it'll exit the app
+
+-> Remember to run your redis server before using app 
+

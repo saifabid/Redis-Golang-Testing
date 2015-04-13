@@ -188,5 +188,6 @@ func excecuteCmd(cmd string, arg []string, c *redis.Client) {
 	}
 	
 	fmt.Println("Added some new changes to this code")
+	fmt.Println("Inside of new line test")
 
 }

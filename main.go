@@ -186,5 +186,7 @@ func excecuteCmd(cmd string, arg []string, c *redis.Client) {
 		fmt.Println("nil")
 
 	}
+	
+	fmt.Println("Added some new changes to this code")
 
 }
